@@ -11,14 +11,15 @@ public class anagrams {
 			
 	public static int[] dinStringInArray(String cuvant) {
 		int[] a = new int[30]; 
-		for (int i = 0; i < cuvant.length(); i++) {
+		for (int i = 0; i < cuvant.length(); i++) 
     		a[i] = (int)cuvant.charAt(i);
-    	}
+    	
 		return a;
 	}
 	
 	public static int[] sorteazaArray(int[] a, int len) {
 		int minim, pozitia=0;
+		
     	for (int i = 0; i < len-1; i++)
         {
             minim = a[i];
@@ -26,12 +27,13 @@ public class anagrams {
             	if (minim > a[j]) {
                 	minim = a[j];
                 	pozitia = j;
+                	
                 }
             }
                 
             if(minim < a[i]) {
             	a[pozitia] = a[i];
-            	a[i] = minim;
+            	a[i] = minim;	
             }
         }
 		return a;
@@ -39,19 +41,29 @@ public class anagrams {
 	
 	public static String dinArrayInString(int[] a, int len) {
 		String cuvant = "";
-		for(int l = 0; l < len; l++) {
+		for(int l = 0; l < len; l++) 
 			 cuvant += (char)a[l];
-		}
+		
 		return cuvant;
 	}
 	
 	public static void printeazaLista(List<String> lista) {
 		if(lista.size() > 0) {
-			for (int i = 0; i < lista.size(); i++) {
+			for (int i = 0; i < lista.size(); i++) 
 				System.out.print(lista.get(i) + " ");
-			}
+			
 			System.out.println();
 		}
+	}
+	
+	public static void afisare(List<String> lista) {
+		if(lista.size() > 0) {
+    		//sortarea lstei cu datagrame in ordine alfabetica
+			lista = sorteazaListaString(lista);
+        	
+        	//printarea setului de anagrame
+        	printeazaLista(lista);
+    	}
 	}
 	
 	public static List<String> sorteazaListaString(List<String> lista) {
@@ -60,12 +72,12 @@ public class anagrams {
     	for (int i = 0; i < lista.size(); i++)
         {
     		inferior = lista.get(i);
-            for (int j = i + 1; j < lista.size(); j++) {
+            for (int j = i + 1; j < lista.size(); j++) 
             	if (comparaCuvintele(inferior,lista.get(j)) < 0) {
                 	inferior = lista.get(j);
                 	pozitia = j;
               }
-            }
+            
             
             if(comparaCuvintele(inferior, lista.get(i)) > 0) {
             	lista.set(pozitia, lista.get(i));
@@ -124,23 +136,18 @@ public class anagrams {
             	linia_sortata = dinArrayInString(a, linia_preluata.length());
             	
             	if(comparaCuvintele(linia_precedenta_sortata, linia_sortata) == 0) {
-            		if(primaAnagrama == true) {               //daca a fost identificata anagrama, exclusiv prima
+            		
+            		if(primaAnagrama == true)             //daca a fost identificata anagrama, exclusiv prima
             			setDeAnagrame.add(linia_precedenta);
-            		}
+            		
             		setDeAnagrame.add(linia_preluata);
             		
             		primaAnagrama = false;
-            		
-                }else {                                       
+                }else {
+                	
                 	primaAnagrama = true;
         			
-                	if(setDeAnagrame.size() > 0) {
-                		//sortarea lstei cu datagrame in ordine alfabetica
-                    	setDeAnagrame = sorteazaListaString(setDeAnagrame);
-                    	
-                    	//printarea setului de anagrame
-                    	printeazaLista(setDeAnagrame);
-                	}
+                	afisare(setDeAnagrame);
                 	
         			setDeAnagrame.clear();
         		}
@@ -149,6 +156,8 @@ public class anagrams {
             	linia_precedenta = linia_preluata;
                 
             }   
+            
+            afisare(setDeAnagrame);
 
             bufferedReader.close();         
         }
