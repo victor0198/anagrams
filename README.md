@@ -1,4 +1,4 @@
-##How to buid and run the application
+#How to buid and run the application
 
 To buid application, open Command Prompt and go to .java file location (anagramsChecker/src/anagramsChecker/), then execute the following command:
 * javac anagrams.java
